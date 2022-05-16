@@ -14,6 +14,9 @@ export default {
         state.books.push(c);
       });
     },
+    clearBooks(state) {
+      state.books = [];
+    },
   },
   actions: {
     async fetchBooks(context) {
@@ -23,6 +26,9 @@ export default {
 
       const bookItems = response.data.items.map(changeBook);
       context.commit('setBooks', bookItems);
+    },
+    clearBooks(context) {
+      context.commit('clearBooks');
     },
   },
   getters: {

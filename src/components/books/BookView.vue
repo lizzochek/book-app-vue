@@ -56,6 +56,9 @@ export default {
   created() {
     this.loadBooks();
   },
+  umnounted() {
+    this.$store.dispatch('clearBooks');
+  },
 };
 </script>
 
