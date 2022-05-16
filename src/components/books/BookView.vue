@@ -18,8 +18,13 @@ export default {
       return this.$store.getters.getBooks;
     },
   },
+  methods: {
+    loadBooks() {
+      this.$store.dispatch('fetchBooks');
+    },
+  },
   created() {
-    this.$store.dispatch('fetchBooks');
+    this.loadBooks();
   },
 };
 </script>

@@ -10,7 +10,9 @@ export default {
   },
   mutations: {
     setBooks(state, payload) {
-      state.books = payload;
+      payload.forEach((c) => {
+        state.books.push(c);
+      });
     },
   },
   actions: {
@@ -20,8 +22,6 @@ export default {
       );
 
       const bookItems = response.data.items.map(changeBook);
-
-      bookItems.sort((a, b) => a.title.localeCompare(b.title));
 
       context.commit('setBooks', bookItems);
     },

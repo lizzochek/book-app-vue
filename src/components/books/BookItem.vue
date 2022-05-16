@@ -23,12 +23,21 @@
         <p>{{ book.averageRating }}</p>
       </div>
     </li>
+
+    <div id="details-button">
+      <base-button link :to="bookDetailsLink">View details</base-button>
+    </div>
   </base-card>
 </template>
 
 <script>
 export default {
   props: ['book'],
+  computed: {
+    bookDetailsLink() {
+      return `${this.$route.path}/${this.book.id}`;
+    },
+  },
 };
 </script>
 
@@ -54,5 +63,10 @@ h4 {
 
 #right {
   overflow: hidden;
+}
+
+#details-button {
+  display: flex;
+  justify-content: flex-end;
 }
 </style>

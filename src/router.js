@@ -1,10 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
 import BookView from './components/books/BookView.vue';
+import BookDetails from './components/books/BookDetails.vue';
 
 const router = createRouter({
   history: createWebHistory(),
-  routes: [{ path: '/books', component: BookView }],
+  routes: [
+    { path: '/books', component: BookView },
+    { path: '/books/:id', props: true, component: BookDetails },
+  ],
 });
 
 export default router;
