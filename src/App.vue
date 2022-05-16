@@ -1,7 +1,13 @@
 <template>
-  <p>App</p>
+  <the-header></the-header>
 </template>
 
-<script></script>
+<script>
+import TheHeader from './components/layout/TheHeader.vue';
+
+export default {
+  components: { TheHeader },
+};
+</script>
 
 <style></style>
