@@ -33,6 +33,11 @@
 
       <h4>Publication date:</h4>
       <p>{{ selectedBook.publishedDate }}</p>
+
+      <div v-if="selectedBook.buyLink">
+        <h4>Buy it here:</h4>
+        <p>{{ selectedBook.buyLink }}</p>
+      </div>
     </base-card>
   </section>
 </template>

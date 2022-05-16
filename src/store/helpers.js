@@ -9,10 +9,12 @@ const changeBook = (book) => ({
       : `${book.volumeInfo.imageLinks.thumbnail}`,
   categories: book.volumeInfo.categories,
   authors: book.volumeInfo.authors.toString(),
-  publisher: book.volumeInfo.publisher,
+  publisher: book.volumeInfo.publisher ? book.volumeInfo.publisher : 'No publisher information',
   description: book.volumeInfo.description ? book.volumeInfo.description : 'No description yet',
-  pageCount: book.volumeInfo.pageCount,
-  publishedDate: book.volumeInfo.publishedDate,
+  pageCount: book.volumeInfo.pageCount ? book.volumeInfo.pageCount : 'Pages number unknown',
+  publishedDate: book.volumeInfo.publishedDate
+    ? book.volumeInfo.publishedDate
+    : 'No date available',
   averageRating: book.volumeInfo.averageRating ? book.volumeInfo.averageRating : 'No rating yet',
   buyLink: book.saleInfo.buyLink,
 });
