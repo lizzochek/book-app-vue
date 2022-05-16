@@ -15,7 +15,8 @@ export default {
       });
     },
     clearBooks(state) {
-      state.books = [];
+      console.log('clearing books');
+      state.books.splice(0, state.books.length);
     },
   },
   actions: {

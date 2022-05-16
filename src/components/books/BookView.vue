@@ -54,10 +54,11 @@ export default {
     },
   },
   created() {
+    this.$store.dispatch('clearBooks');
     this.loadBooks();
   },
-  umnounted() {
-    this.$store.dispatch('clearBooks');
+  beforeRouteLeave(to, from, next) {
+    next();
   },
 };
 </script>

@@ -12,11 +12,8 @@
       />
 
       <div>
-        <base-badge
-          v-for="category in selectedBook.categories"
-          :key="category"
-          :title="category"
-        ></base-badge>
+        <base-badge v-for="category in selectedBook.categories" :key="category" :title="category">
+        </base-badge>
       </div>
 
       <h4>Description</h4>
