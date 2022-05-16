@@ -45,11 +45,7 @@ export default {
       selectedBook: null,
     };
   },
-  methods: {
-    loadBooks() {
-      this.$store.dispatch('fetchBooks');
-    },
-  },
+
   created() {
     this.selectedBook = this.$store.getters.getBooks.find(
       (book) => book.id === this.$route.params.id,
