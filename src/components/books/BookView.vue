@@ -8,7 +8,7 @@
       <base-spinner></base-spinner>
     </div>
     <div v-else-if="books.length">
-      <book-filter></book-filter>
+      <book-filter @change-filter="filterBooks"></book-filter>
       <ul v-for="book in books" :key="book.id">
         <book-item :book="book"> </book-item>
       </ul>
@@ -20,6 +20,7 @@
 <script>
 import BookFilter from './BookFilter.vue';
 import BookItem from './BookItem.vue';
+import { filterBooks } from '../../store/helpers';
 
 export default {
   components: { BookItem, BookFilter },
@@ -39,6 +40,7 @@ export default {
       this.isLoading = true;
       try {
         await this.$store.dispatch('fetchBooks');
+        filterBooks(this.books, 'alphabet-asc');
       } catch (err) {
         this.error = 'Something went wrong. Please try again later';
       }
@@ -46,6 +48,9 @@ export default {
     },
     handleError() {
       this.error = null;
+    },
+    filterBooks(updateFilter) {
+      filterBooks(this.books, updateFilter);
     },
   },
   created() {

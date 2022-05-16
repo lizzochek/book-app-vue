@@ -3,7 +3,7 @@
     <div id="wrapper">
       <h2 id="left">Filter books</h2>
 
-      <select class="minimal" name="filters" id="filters" @select="filterSelected">
+      <select class="minimal" name="filters" id="filters" @change="filterSelected">
         <option value="alphabet-asc">A - z</option>
         <option value="alphabet-desc">Z - a</option>
         <option value="publicationDate">Most recent</option>
@@ -16,25 +16,10 @@
 <script>
 export default {
   emits: ['change-filter'],
-  data() {
-    return {
-      filters: {
-        'alphabet-asc': false,
-        'alphabet-desc': false,
-        publicationDate: false,
-        rating: false,
-      },
-    };
-  },
   methods: {
     filterSelected(event) {
-      const { id, checked: isActive } = event.target;
-      const updatedFilters = {
-        ...this.filters,
-        [id]: isActive,
-      };
-      console.log(updatedFilters);
-      this.$emit('change-filter');
+      const id = event.target.value;
+      this.$emit('change-filter', id);
     },
   },
 };
@@ -78,11 +63,13 @@ select {
   -moz-appearance: none;
 }
 
+/* eslint-disable */
 select.minimal {
   background-image: linear-gradient(45deg, transparent 50%, gray 50%),
-    linear-gradient(135deg, gray 50%, transparent 50%), linear-gradient(to right, #ccc, #ccc);
-  background-position: calc(100% - 20px) calc(1em + 2px), calc(100% - 15px) calc(1em + 2px),
-    calc(100% - 2.5em) 0.5em;
+                    linear-gradient(135deg, gray 50%, transparent 50%),
+                    linear-gradient(to right, #ccc, #ccc));
+  background-position: (calc(100% - 20px) calc(1em + 2px),
+  calc(100% - 15px) calc(1em + 2px), calc(100% - 2.5em) 0.5em);
   background-size: 5px 5px, 5px 5px, 1px 1.5em;
   background-repeat: no-repeat;
 }
