@@ -34,6 +34,7 @@ export default {
 
 <style scoped>
 li {
+  overflow: auto;
   margin: 1rem 0;
   padding: 1rem;
 }
@@ -42,9 +43,6 @@ h3 {
 }
 h3,
 h4 {
-  margin: 0.5rem 0;
-}
-div {
   margin: 0.5rem 0;
 }
 
