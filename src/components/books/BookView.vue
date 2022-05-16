@@ -3,10 +3,12 @@
     <base-dialog :show="!!error" title="An error occured" @close="handleError">
       <p>{{ error }}</p>
     </base-dialog>
+
     <div v-if="isLoading">
       <base-spinner></base-spinner>
     </div>
     <div v-else-if="books.length">
+      <book-filter></book-filter>
       <ul v-for="book in books" :key="book.id">
         <book-item :book="book"> </book-item>
       </ul>
@@ -16,10 +18,11 @@
 </template>
 
 <script>
+import BookFilter from './BookFilter.vue';
 import BookItem from './BookItem.vue';
 
 export default {
-  components: { BookItem },
+  components: { BookItem, BookFilter },
   data() {
     return {
       isLoading: false,

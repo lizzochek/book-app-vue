@@ -9,14 +9,46 @@ const changeBook = (book) => ({
       : `${book.volumeInfo.imageLinks.thumbnail}`,
   categories: book.volumeInfo.categories,
   authors: book.volumeInfo.authors.toString(),
-  publisher: book.volumeInfo.publisher ? book.volumeInfo.publisher : 'No publisher information',
-  description: book.volumeInfo.description ? book.volumeInfo.description : 'No description yet',
-  pageCount: book.volumeInfo.pageCount ? book.volumeInfo.pageCount : 'Pages number unknown',
+  publisher: book.volumeInfo.publisher
+    ? book.volumeInfo.publisher
+    : 'No publisher information',
+  description: book.volumeInfo.description
+    ? book.volumeInfo.description
+    : 'No description yet',
+  pageCount: book.volumeInfo.pageCount
+    ? book.volumeInfo.pageCount
+    : 'Pages number unknown',
   publishedDate: book.volumeInfo.publishedDate
     ? book.volumeInfo.publishedDate
     : 'No date available',
-  averageRating: book.volumeInfo.averageRating ? book.volumeInfo.averageRating : 'No rating yet',
+  averageRating: book.volumeInfo.averageRating
+    ? book.volumeInfo.averageRating
+    : 0,
   buyLink: book.saleInfo.buyLink,
 });
 
-export default changeBook;
+const filterAlphabet = (books, mode) => {
+  if (mode === 'asc') {
+    books.sort((a, b) => a.title.localeCompare(b.title));
+  } else {
+    books.sort((a, b) => !a.title.localeCompare(b.title));
+  }
+};
+
+const filterRating = (books) => {
+  books.sort((a, b) => b.averageRating - a.averageRating);
+};
+
+const filterDate = (books) => {
+  books.sort(
+    (a, b) => Date.parse(b.publishedDate) - Date.parse(a.publishedDate),
+  );
+};
+
+// prettier-ignore
+export {
+  changeBook,
+  filterAlphabet,
+  filterRating,
+  filterDate,
+};
