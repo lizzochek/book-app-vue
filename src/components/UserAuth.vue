@@ -51,6 +51,39 @@ export default {
     },
   },
   methods: {
+    checkValidity() {
+      if (this.email === '' || !this.email.includes('@') || this.password.length < 6) {
+        this.formIsValid = false;
+        return false;
+      }
+      return true;
+    },
+    async submitForm() {
+      this.formIsValid = true;
+      if (!this.checkValidity()) return;
+
+      this.isLoading = true;
+
+      const actionPayload = {
+        email: this.email,
+        password: this.password,
+      };
+
+      try {
+        if (this.mode === 'login') {
+          await this.$store.dispatch('authentication/login', actionPayload);
+        } else {
+          await this.$store.dispatch('authentication/signup', actionPayload);
+        }
+
+        const redirectUrl = this.$route.query.redirect || 'books';
+        this.$router.replace(`/${redirectUrl}`);
+      } catch (err) {
+        this.error = err.message;
+      }
+      this.isLoading = false;
+    },
+
     switchMode() {
       this.mode = this.mode === 'login' ? 'signup' : 'login';
     },

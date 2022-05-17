@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { changeBook } from './helpers';
+import { changeBook } from '../helpers';
 
 export default {
   state() {
