@@ -29,6 +29,7 @@ export default {
       );
 
       const bookItems = response.data.items.map(changeBook);
+
       context.commit('setBooks', bookItems);
     },
     clearBooks(context) {
