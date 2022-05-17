@@ -6,6 +6,7 @@ export default {
   state() {
     return {
       books: [],
+      searchOption: 'Stephen King',
     };
   },
   mutations: {
@@ -14,14 +15,17 @@ export default {
         state.books.push(c);
       });
     },
+    setSearchOption(state, payload) {
+      state.searchOption = payload;
+    },
     clearBooks(state) {
       state.books.splice(0, state.books.length);
     },
   },
   actions: {
-    async fetchBooks(context, payload) {
+    async fetchBooks(context) {
       const response = await axios(
-        `https://www.googleapis.com/books/v1/volumes?q=inauthor:${payload}&max-result=40&key=AIzaSyB-Rk9X57Vgi2gP26Dfi6sTFgL-eynPhoI`,
+        `https://www.googleapis.com/books/v1/volumes?q=${this.getters.getSearchOption}&max-result=40&startIndex=10&key=AIzaSyB-Rk9X57Vgi2gP26Dfi6sTFgL-eynPhoI`,
       );
 
       const bookItems = response.data.items.map(changeBook);
@@ -30,10 +34,16 @@ export default {
     clearBooks(context) {
       context.commit('clearBooks');
     },
+    assignSearchOption(context, payload) {
+      context.commit('setSearchOption', payload);
+    },
   },
   getters: {
     getBooks(state) {
       return state.books;
+    },
+    getSearchOption(state) {
+      return state.searchOption;
     },
     getBookById: (state) => (id) => state.books.find((book) => book.id === id),
   },

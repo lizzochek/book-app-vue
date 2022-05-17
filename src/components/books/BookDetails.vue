@@ -42,8 +42,10 @@ export default {
   },
   async created() {
     // To load when not redirecting from all books
-    if (this.$store.getters.getBooks.length === 0) await this.$store.dispatch('fetchBooks');
-
+    if (this.$store.getters.getBooks.length === 0) {
+      await this.$store.dispatch('fetchBooks', this.searchOption);
+    }
+    console.log(this.searchOption);
     this.selectedBook = this.$store.getters.getBookById(this.id);
   },
 };

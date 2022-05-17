@@ -36,10 +36,10 @@ export default {
     },
   },
   methods: {
-    async loadBooks(payload) {
+    async loadBooks() {
       this.isLoading = true;
       try {
-        await this.$store.dispatch('fetchBooks', payload);
+        await this.$store.dispatch('fetchBooks');
         filterBooks(this.books, 'alphabet-asc');
       } catch (err) {
         this.error = 'Something went wrong. Please try again later';
@@ -48,7 +48,8 @@ export default {
     },
     setSearchOption(input) {
       this.$store.dispatch('clearBooks');
-      this.loadBooks(input);
+      this.$store.dispatch('assignSearchOption', input);
+      this.loadBooks();
     },
     handleError() {
       this.error = null;
@@ -59,7 +60,7 @@ export default {
   },
   created() {
     this.$store.dispatch('clearBooks');
-    this.loadBooks('Stephen King');
+    this.loadBooks();
   },
   beforeRouteLeave(to, from, next) {
     next();
