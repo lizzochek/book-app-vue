@@ -21,7 +21,7 @@
 <script>
 import BookFilter from './BookFilter.vue';
 import BookItem from './BookItem.vue';
-import { filterBooks } from '../../store/helpers';
+import { filterBooks } from '../../../store/helpers';
 
 export default {
   components: { BookItem, BookFilter },

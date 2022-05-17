@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
-import BookView from './components/books/BookView.vue';
-import BookDetails from './components/books/BookDetails.vue';
-import NotFound from './components/NotFound.vue';
-import UserAuth from './components/UserAuth.vue';
+import BookView from './components/pages/books/BookView.vue';
+import BookDetails from './components/pages/books/BookDetails.vue';
+import NotFound from './components/pages/NotFound.vue';
+import UserAuth from './components/pages/UserAuth.vue';
 
 const router = createRouter({
   history: createWebHistory(),

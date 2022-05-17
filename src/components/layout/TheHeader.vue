@@ -7,10 +7,10 @@
         <li>
           <router-link to="/books">Books</router-link>
         </li>
-        <!-- <li v-if="isLoggedIn">
+        <li v-if="isLoggedIn">
           <router-link to="/wishlist">Wishlist</router-link>
-        </li> -->
-        <li>
+        </li>
+        <li v-else>
           <router-link to="/authentication">Login</router-link>
         </li>
         <li v-if="isLoggedIn">
