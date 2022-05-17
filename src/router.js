@@ -6,6 +6,7 @@ import BookDetails from './components/books/BookDetails.vue';
 const router = createRouter({
   history: createWebHistory(),
   routes: [
+    { path: '/', redirect: '/books' },
     { path: '/books', component: BookView },
     { path: '/books/:id', props: true, component: BookDetails },
   ],
