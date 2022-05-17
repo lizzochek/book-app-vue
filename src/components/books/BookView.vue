@@ -12,6 +12,7 @@
       <ul v-for="book in books" :key="book.id">
         <book-item :book="book"> </book-item>
       </ul>
+      <base-paginate></base-paginate>
     </div>
     <h3 v-else>No books found</h3>
   </section>
