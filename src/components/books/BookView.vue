@@ -7,12 +7,12 @@
     <div v-if="isLoading">
       <base-spinner></base-spinner>
     </div>
-    <div v-else-if="books.length">
+    <div v-else-if="chosenBooks.length">
       <book-filter @change-filter="filterBooks" @searchBooks="setSearchOption"></book-filter>
-      <ul v-for="book in books" :key="book.id">
+      <ul v-for="book in chosenBooks" :key="book.id">
         <book-item :book="book"> </book-item>
       </ul>
-      <base-paginate :numOfPages="numOfPages"></base-paginate>
+      <base-paginate :numOfPages="numOfPages" @pageChanged="onPageChanged"></base-paginate>
     </div>
     <h3 v-else>No books found</h3>
   </section>
@@ -30,6 +30,7 @@ export default {
       isLoading: false,
       error: false,
       numOfPages: 0,
+      chosenBooks: [],
     };
   },
   computed: {
@@ -44,7 +45,9 @@ export default {
         await this.$store.dispatch('fetchBooks');
 
         this.numOfPages = this.books.length / 10;
+
         filterBooks(this.books, 'alphabet-asc');
+        this.getChosenBooks(1);
       } catch (err) {
         this.error = 'Something went wrong. Please try again later';
       }
@@ -60,6 +63,18 @@ export default {
     },
     filterBooks(updateFilter) {
       filterBooks(this.books, updateFilter);
+      this.getChosenBooks(1);
+    },
+    onPageChanged(page) {
+      this.getChosenBooks(page);
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'smooth',
+      });
+    },
+    getChosenBooks(page) {
+      this.chosenBooks = this.books.slice((page - 1) * 10, (page - 1) * 10 + 10);
     },
   },
   created() {

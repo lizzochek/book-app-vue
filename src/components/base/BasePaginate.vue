@@ -2,13 +2,13 @@
   <nav aria-label="pagination">
     <ul class="pagination">
       <li>
-        <base-button @click="selectPage(1)">First page</base-button>
+        <base-button @click="$emit('pageChanged', 1)">First page</base-button>
       </li>
       <li v-for="num in numOfPages" :key="num">
-        <base-button @click="selectPage(num)">{{ num }}</base-button>
+        <base-button @click="$emit('pageChanged', num)">{{ num }}</base-button>
       </li>
       <li>
-        <base-button @click="selectPage(numOfPages)">Last page</base-button>
+        <base-button @click="$emit('pageChanged', numOfPages)">Last page</base-button>
       </li>
     </ul>
   </nav>
@@ -17,11 +17,7 @@
 <script>
 export default {
   props: ['numOfPages'],
-  methods: {
-    selectPage(pageNum) {
-      console.log(pageNum);
-    },
-  },
+  emits: ['pageChanged'],
 };
 </script>
 
