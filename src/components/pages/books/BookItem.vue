@@ -1,7 +1,18 @@
 <template>
   <base-card>
+    <base-button link to="/authentication" v-if="!isLoggedIn" id="log-in-wish">
+      Log in to save
+    </base-button>
+
+    <div v-if="isLoggedIn" id="heart-img">
+      <router-link to="/wishlist">
+        <img src="../../../assets/heart-svgrepo-com.svg" alt="heart img" />
+      </router-link>
+    </div>
+
     <li>
       <h3>{{ book.title }}</h3>
+
       <div id="left">
         <h4>{{ book.authors }}</h4>
         <img v-if="book.thumbnail" :src="book.thumbnail" alt="Book cover" width="200" />
@@ -37,6 +48,9 @@ export default {
     bookDetailsLink() {
       return `${this.$route.path}/${this.book.id}`;
     },
+    isLoggedIn() {
+      return this.$store.getters['authentication/isLoggedIn'];
+    },
   },
 };
 </script>
@@ -63,10 +77,23 @@ h4 {
 
 #right {
   overflow: hidden;
+  padding-left: 3rem;
 }
 
+#log-in-wish {
+  margin-top: 1rem;
+  overflow: hidden;
+  float: right;
+}
 #details-button {
   display: flex;
   justify-content: flex-end;
+}
+
+#heart-img {
+  width: 50px;
+  overflow: hidden;
+  float: right;
+  margin: 1rem;
 }
 </style>

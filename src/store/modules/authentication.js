@@ -33,6 +33,7 @@ export default {
       context.commit('setUser', {
         userId: null,
       });
+      context.commit('setAuthenticated', false);
     },
     async auth(context, payload) {
       const { mode } = payload;
