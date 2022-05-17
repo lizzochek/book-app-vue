@@ -19,9 +19,9 @@ export default {
     },
   },
   actions: {
-    async fetchBooks(context) {
+    async fetchBooks(context, payload) {
       const response = await axios(
-        'https://www.googleapis.com/books/v1/volumes?q=inauthor:Stephen+King&key=AIzaSyB-Rk9X57Vgi2gP26Dfi6sTFgL-eynPhoI',
+        `https://www.googleapis.com/books/v1/volumes?q=inauthor:${payload}&max-result=40&key=AIzaSyB-Rk9X57Vgi2gP26Dfi6sTFgL-eynPhoI`,
       );
 
       const bookItems = response.data.items.map(changeBook);

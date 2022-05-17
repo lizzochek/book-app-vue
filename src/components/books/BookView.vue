@@ -8,7 +8,7 @@
       <base-spinner></base-spinner>
     </div>
     <div v-else-if="books.length">
-      <book-filter @change-filter="filterBooks"></book-filter>
+      <book-filter @change-filter="filterBooks" @searchBooks="setSearchOption"></book-filter>
       <ul v-for="book in books" :key="book.id">
         <book-item :book="book"> </book-item>
       </ul>
@@ -36,15 +36,19 @@ export default {
     },
   },
   methods: {
-    async loadBooks() {
+    async loadBooks(payload) {
       this.isLoading = true;
       try {
-        await this.$store.dispatch('fetchBooks');
+        await this.$store.dispatch('fetchBooks', payload);
         filterBooks(this.books, 'alphabet-asc');
       } catch (err) {
         this.error = 'Something went wrong. Please try again later';
       }
       this.isLoading = false;
+    },
+    setSearchOption(input) {
+      this.$store.dispatch('clearBooks');
+      this.loadBooks(input);
     },
     handleError() {
       this.error = null;
@@ -55,7 +59,7 @@ export default {
   },
   created() {
     this.$store.dispatch('clearBooks');
-    this.loadBooks();
+    this.loadBooks('Stephen King');
   },
   beforeRouteLeave(to, from, next) {
     next();
