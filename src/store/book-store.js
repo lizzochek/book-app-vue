@@ -25,7 +25,7 @@ export default {
   actions: {
     async fetchBooks(context) {
       const response = await axios(
-        `https://www.googleapis.com/books/v1/volumes?q=${this.getters.getSearchOption}&max-result=40&startIndex=10&key=AIzaSyB-Rk9X57Vgi2gP26Dfi6sTFgL-eynPhoI`,
+        `https://www.googleapis.com/books/v1/volumes?q=${this.getters.getSearchOption}&maxResults=40&startIndex=10&key=AIzaSyB-Rk9X57Vgi2gP26Dfi6sTFgL-eynPhoI`,
       );
 
       const bookItems = response.data.items.map(changeBook);

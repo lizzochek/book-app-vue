@@ -4,20 +4,11 @@
       <li>
         <base-button @click="selectPage(1)">First page</base-button>
       </li>
-      <li>
-        <base-button @click="selectPage(1)">1</base-button>
+      <li v-for="num in numOfPages" :key="num">
+        <base-button @click="selectPage(num)">{{ num }}</base-button>
       </li>
       <li>
-        <base-button @click="selectPage(2)">2</base-button>
-      </li>
-      <li>
-        <base-button @click="selectPage(3)">3</base-button>
-      </li>
-      <li>
-        <base-button @click="selectPage(4)">4</base-button>
-      </li>
-      <li>
-        <base-button @click="selectPage(4)">Last page</base-button>
+        <base-button @click="selectPage(numOfPages)">Last page</base-button>
       </li>
     </ul>
   </nav>
@@ -25,6 +16,7 @@
 
 <script>
 export default {
+  props: ['numOfPages'],
   methods: {
     selectPage(pageNum) {
       console.log(pageNum);

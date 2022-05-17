@@ -12,7 +12,7 @@
       <ul v-for="book in books" :key="book.id">
         <book-item :book="book"> </book-item>
       </ul>
-      <base-paginate></base-paginate>
+      <base-paginate :numOfPages="numOfPages"></base-paginate>
     </div>
     <h3 v-else>No books found</h3>
   </section>
@@ -29,6 +29,7 @@ export default {
     return {
       isLoading: false,
       error: false,
+      numOfPages: 0,
     };
   },
   computed: {
@@ -41,6 +42,8 @@ export default {
       this.isLoading = true;
       try {
         await this.$store.dispatch('fetchBooks');
+
+        this.numOfPages = this.books.length / 10;
         filterBooks(this.books, 'alphabet-asc');
       } catch (err) {
         this.error = 'Something went wrong. Please try again later';
