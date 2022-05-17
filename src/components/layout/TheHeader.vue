@@ -8,7 +8,7 @@
           <router-link to="/books">Books</router-link>
         </li>
         <li v-if="isLoggedIn">
-          <router-link to="/wishlist">Wishlist</router-link>
+          <router-link to="/wish-list">Wishlist</router-link>
         </li>
         <li v-else>
           <router-link to="/authentication">Login</router-link>
@@ -28,7 +28,7 @@ export default {
   components: { BaseButton },
   computed: {
     isLoggedIn() {
-      return this.$store.getters.isAuthenticated;
+      return this.$store.getters['authentication/isLoggedIn'];
     },
   },
   methods: {

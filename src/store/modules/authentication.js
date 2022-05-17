@@ -3,11 +3,15 @@ export default {
   state() {
     return {
       userId: null,
+      isLoggedIn: false,
     };
   },
   mutations: {
     setUser(state, payload) {
       state.userId = payload.userId;
+    },
+    setAuthenticated(state, payload) {
+      state.isLoggedIn = payload;
     },
   },
   actions: {
@@ -48,8 +52,10 @@ export default {
       if (!response.ok) {
         throw new Error(resData.message || 'Something went wrong');
       }
+      if (mode === 'login') context.commit('setAuthenticated', true);
 
       localStorage.setItem('userId', resData.localId);
+
       context.commit('setUser', {
         userId: resData.localId,
       });
@@ -61,16 +67,19 @@ export default {
         context.commit('setUser', {
           userId,
         });
+        context.commit('setAuthenticated', true);
       }
+    },
+    assignAuthenticated(context, payload) {
+      context.commit('setAuthenticated', payload);
     },
   },
   getters: {
     userId(state) {
       return state.userId;
     },
-
-    isAuthenticated(state) {
-      return !!state.token;
+    isLoggedIn(state) {
+      return state.isLoggedIn;
     },
   },
 };

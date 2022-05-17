@@ -4,6 +4,7 @@ import BookView from './components/pages/books/BookView.vue';
 import BookDetails from './components/pages/books/BookDetails.vue';
 import NotFound from './components/pages/NotFound.vue';
 import UserAuth from './components/pages/UserAuth.vue';
+import WishList from './components/pages/WishList.vue';
 
 const router = createRouter({
   history: createWebHistory(),
@@ -12,6 +13,7 @@ const router = createRouter({
     { path: '/books', component: BookView },
     { path: '/books/:id', props: true, component: BookDetails },
     { path: '/authentication', component: UserAuth },
+    { path: '/wishlist', component: WishList },
     { path: '/:notFound(.*)', component: NotFound },
   ],
 });
