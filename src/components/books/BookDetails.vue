@@ -45,8 +45,12 @@ export default {
     if (this.$store.getters.getBooks.length === 0) {
       await this.$store.dispatch('fetchBooks', this.searchOption);
     }
-    console.log(this.searchOption);
+
     this.selectedBook = this.$store.getters.getBookById(this.id);
+
+    if (!this.selectedBook) {
+      this.$router.replace('/:notFound(.*)');
+    }
   },
 };
 </script>
