@@ -4,10 +4,10 @@
       Log in to save
     </base-button>
 
-    <div v-if="isLoggedIn" id="heart-img">
-      <router-link to="/wishlist">
+    <div v-if="isLoggedIn">
+      <button id="heart-img" @click="addToWishList">
         <img src="../../../assets/heart-svgrepo-com.svg" alt="heart img" />
-      </router-link>
+      </button>
     </div>
 
     <li>
@@ -50,6 +50,11 @@ export default {
     },
     isLoggedIn() {
       return this.$store.getters['authentication/isLoggedIn'];
+    },
+  },
+  methods: {
+    addToWishList() {
+      this.$store.dispatch('wishList/addToWishList', this.book);
     },
   },
 };
@@ -95,5 +100,7 @@ h4 {
   overflow: hidden;
   float: right;
   margin: 1rem;
+  background-color: white;
+  border: none;
 }
 </style>

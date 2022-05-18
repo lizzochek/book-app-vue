@@ -14,6 +14,7 @@ const router = createRouter({
     { path: '/books/:id', props: true, component: BookDetails },
     { path: '/authentication', component: UserAuth },
     { path: '/wishlist', component: WishList },
+    { path: '/wishlist/:id', component: BookDetails, props: true },
     { path: '/:notFound(.*)', component: NotFound },
   ],
 });

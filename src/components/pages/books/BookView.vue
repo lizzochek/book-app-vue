@@ -86,9 +86,6 @@ export default {
     this.$store.dispatch('clearBooks');
     this.loadBooks();
   },
-  beforeRouteLeave(to, from, next) {
-    next();
-  },
 };
 </script>
 
