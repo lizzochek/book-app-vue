@@ -32,9 +32,12 @@ export default {
         `https://www.googleapis.com/books/v1/volumes?q=${this.getters.getSearchOption}&maxResults=40&startIndex=1&key=AIzaSyB-Rk9X57Vgi2gP26Dfi6sTFgL-eynPhoI`,
       );
 
-      const bookItems = response.data.items.map(changeBook);
-
-      context.commit('setBooks', bookItems);
+      if (!response.data.items) {
+        context.commit('setBooks', []);
+      } else {
+        const bookItems = response.data.items.map(changeBook);
+        context.commit('setBooks', bookItems);
+      }
     },
     clearBooks(context) {
       context.commit('clearBooks');
