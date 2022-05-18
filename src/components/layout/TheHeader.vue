@@ -8,7 +8,7 @@
           <router-link to="/books">Books</router-link>
         </li>
         <li v-if="isLoggedIn">
-          <router-link to="/wish-list">Wishlist</router-link>
+          <router-link to="/wishlist">Wishlist</router-link>
         </li>
         <li v-else>
           <router-link to="/authentication">Login</router-link>
