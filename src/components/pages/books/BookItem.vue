@@ -1,19 +1,24 @@
 <template>
   <base-card>
-    <base-button link to="/authentication" v-if="!isLoggedIn" id="log-in-wish">
-      Log in to save
-    </base-button>
+    <transition name="fade-button" mode="out-in">
+      <base-button link to="/authentication" v-if="!isLoggedIn" id="log-in-wish">
+        Log in to save
+      </base-button>
 
-    <div v-if="isLoggedIn">
-      <button v-if="!isInWishlist" id="heart-img-btn" @click="addToWishList">
-        <img id="heart-img" src="../../../assets/heart-svgrepo-com.svg" alt="heart img" />
-      </button>
+      <div v-else>
+        <button v-if="!isInWishlist" id="heart-img-btn" @click="addToWishList">
+          <img id="heart-img" src="../../../assets/heart-svgrepo-com.svg" alt="heart img" />
+        </button>
 
-      <button v-else id="heart-img-btn" @click="removeFromWishList">
-        <img id="heart-img-bold" src="../../../assets/heart-svgrepo-com-bold.svg" alt="heart img" />
-      </button>
-    </div>
-
+        <button v-else id="heart-img-btn" @click="removeFromWishList">
+          <img
+            id="heart-img-bold"
+            src="../../../assets/heart-svgrepo-com-bold.svg"
+            alt="heart img"
+          />
+        </button>
+      </div>
+    </transition>
     <li>
       <h3>{{ book.title }}</h3>
 
@@ -119,5 +124,34 @@ h4 {
 
 #heart-img-bold {
   width: 40px;
+}
+
+.animate {
+  animation: slide-scale 0.5s ease-out forwards;
+}
+.fade-button-enter-from,
+.fade-button-leave-to {
+  opacity: 0;
+}
+.fade-button-enter-active {
+  transition: opacity 0.7s ease-out;
+}
+.fade-button-leave-active {
+  transition: opacity 0.7s ease-in;
+}
+.fade-button-enter-to,
+.fade-button-leave-from {
+  opacity: 1;
+}
+@keyframes slide-scale {
+  0% {
+    transform: translateX(0) scale(1);
+  }
+  70% {
+    transform: translateX(-120px) scale(1.1);
+  }
+  100% {
+    transform: translateX(-150px) scale(1);
+  }
 }
 </style>

@@ -96,7 +96,6 @@ menu {
 .modal-enter-from {
 }
 .modal-enter-active {
-  /* transition: all 0.3s ease-out; */
   animation: modal 0.3s ease-out;
 }
 .modal-enter-to {
@@ -104,7 +103,6 @@ menu {
 .modal-leave-from {
 }
 .modal-leave-active {
-  /* transition: all 0.3s ease-out; */
   animation: modal 0.3s ease-in reverse;
 }
 .modal-leave-to {
