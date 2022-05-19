@@ -41,12 +41,19 @@ export default {
     books() {
       return this.$store.getters.getBooks;
     },
+    isLoggedIn() {
+      return this.$store.getters['authentication/isLoggedIn'];
+    },
   },
   methods: {
     async loadBooks() {
       this.isLoading = true;
       try {
         await this.$store.dispatch('fetchBooks');
+
+        if (this.isLoggedIn) {
+          await this.$store.dispatch('wishList/fetchFromWishList');
+        }
 
         this.numOfPages = this.books.length / 10;
 

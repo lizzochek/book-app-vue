@@ -49,6 +49,16 @@ export default {
         context.commit('setBooks', response.data);
       }
     },
+    async removeFromWishList(context, payload) {
+      const fireBaseId = this.getters['wishList/getWishBookById'](payload)[0];
+      const response = await axios.delete(
+        `https://book-app-vue-default-rtdb.europe-west1.firebasedatabase.app/wishlist/${this.getters['authentication/userId']}/${fireBaseId}.json`,
+      );
+
+      if (response.statusText !== 'OK') {
+        throw new Error('Something went wrong');
+      }
+    },
     addBook(context, payload) {
       context.commit('addBook', payload);
     },
@@ -56,6 +66,10 @@ export default {
   getters: {
     getWishlist(state) {
       return state.wishListBooks;
+    },
+    getWishBookById: (state) => (payload) => {
+      const bookValues = Object.entries(state.wishListBooks);
+      return bookValues.find((obj) => obj[1].id === payload.id);
     },
   },
 };

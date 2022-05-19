@@ -41,6 +41,7 @@ export default {
       return this.$store.getters['wishList/getWishlist'];
     },
   },
+
   methods: {
     handleError() {
       this.error = null;
@@ -66,6 +67,7 @@ export default {
         behavior: 'smooth',
       });
     },
+
     getChosenBooks(page) {
       this.chosenBooks = Object.entries(this.wishlistBooks).slice(
         (page - 1) * 10,

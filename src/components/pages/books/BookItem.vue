@@ -5,8 +5,12 @@
     </base-button>
 
     <div v-if="isLoggedIn">
-      <button id="heart-img" @click="addToWishList">
-        <img src="../../../assets/heart-svgrepo-com.svg" alt="heart img" />
+      <button v-if="!isInWishlist" id="heart-img-btn" @click="addToWishList">
+        <img id="heart-img" src="../../../assets/heart-svgrepo-com.svg" alt="heart img" />
+      </button>
+
+      <button v-else id="heart-img-btn" @click="removeFromWishList">
+        <img id="heart-img-bold" src="../../../assets/heart-svgrepo-com-bold.svg" alt="heart img" />
       </button>
     </div>
 
@@ -45,6 +49,9 @@
 export default {
   props: ['book'],
   computed: {
+    isInWishlist() {
+      return !!this.$store.getters['wishList/getWishBookById'](this.book);
+    },
     bookDetailsLink() {
       return `${this.$route.path}/${this.book.id}`;
     },
@@ -55,6 +62,10 @@ export default {
   methods: {
     addToWishList() {
       this.$store.dispatch('wishList/addToWishList', this.book);
+    },
+    async removeFromWishList() {
+      await this.$store.dispatch('wishList/removeFromWishList', this.book);
+      this.$parent.loadWishList();
     },
   },
 };
@@ -95,12 +106,16 @@ h4 {
   justify-content: flex-end;
 }
 
-#heart-img {
+#heart-img-btn {
   width: 50px;
   overflow: hidden;
   float: right;
   margin: 1rem;
   background-color: white;
   border: none;
+}
+
+#heart-img-bold {
+  width: 40px;
 }
 </style>
