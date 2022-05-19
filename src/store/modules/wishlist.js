@@ -58,6 +58,13 @@ export default {
       if (response.statusText !== 'OK') {
         throw new Error('Something went wrong');
       }
+
+      const wishList = Object.values(this.getters['wishList/getWishlist']);
+      const newWishList = wishList.filter(
+        (el, index) => index !== wishList.findIndex((item) => item.id === payload.id),
+      );
+
+      context.commit('setBooks', newWishList);
     },
     addBook(context, payload) {
       context.commit('addBook', payload);

@@ -47,7 +47,7 @@
 
 <script>
 export default {
-  props: ['book'],
+  props: ['book', 'onWishlist'],
   computed: {
     isInWishlist() {
       return !!this.$store.getters['wishList/getWishBookById'](this.book);
@@ -65,7 +65,9 @@ export default {
     },
     async removeFromWishList() {
       await this.$store.dispatch('wishList/removeFromWishList', this.book);
-      this.$parent.loadWishList();
+      if (this.$parent.loadWishList) {
+        this.$parent.loadWishList();
+      }
     },
   },
 };
